@@ -11,7 +11,7 @@ runner:
 description: >-
   This project can be used as a starting point for developing your SubQuery
   project
-repository: 'https://github.com/subquery/subql-starter'
+repository: 'https://github.com/JayJay1024/darwinia-nft-subql.git'
 schema:
   file: ./schema.graphql
 network:
@@ -20,16 +20,13 @@ network:
   dictionary: 'https://api.subquery.network/sq/subquery/polkadot-dictionary'
 dataSources:
   - kind: substrate/Runtime
-    startBlock: 1
+    startBlock: 9424555
     mapping:
       file: ./dist/index.js
       handlers:
-        - handler: handleBlock
-          kind: substrate/BlockHandler
-        - handler: handleEvent
-          kind: substrate/EventHandler
-          filter:
-            module: balances
-            method: Deposit
-        - handler: handleCall
+        - handler: handleSystemRemarkCall
           kind: substrate/CallHandler
+          filter:
+            module: system
+            method: remark
+            success: true
